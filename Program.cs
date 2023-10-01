@@ -1,10 +1,29 @@
-﻿using System.Net.Mime;
+﻿
 // See https://aka.ms/new-console-template for more information
-Console.WriteLine("Quiz Game");
+
+string playerName;
 var questions = new List<Question>();
 
 SeedQuestionsAndOptions();
+StartGame();
 
+void StartGame()
+{
+    Console.WriteLine("Quiz Game");
+    Console.WriteLine("What is your Name?");
+    playerName = Console.ReadLine();
+    Console.WriteLine($"Welcome {playerName}");
+
+    foreach (var question in questions)
+    {
+        Console.WriteLine(question.QuestionText);
+        Console.WriteLine("Please type the number corresponding to your response");
+            foreach (var option in question.Options)
+            {
+                Console.WriteLine($"{option.Id} {option.Text}");
+            }
+    }
+}
 
 void SeedQuestionsAndOptions()
 {
@@ -59,4 +78,7 @@ void SeedQuestionsAndOptions()
             new Option { Id = 4, Text = "Taiwan"}
         }
     });
+
+
+    Console.WriteLine(questions);
 }
