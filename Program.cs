@@ -3,6 +3,7 @@
 
 string playerName;
 var questions = new List<Question>();
+var answers = new List<Answer>();
 
 SeedQuestionsAndOptions();
 StartGame();
@@ -25,6 +26,7 @@ void StartGame()
                 Console.WriteLine($"{option.Id} {option.Text}");
             }
            var selectedOption = GetSelectedAnswer();
+           AddAnswerToList(selectedOption,question);
         }
    }
    catch (Exception e)
@@ -47,6 +49,29 @@ string GetSelectedAnswer()
         selectedOption = GetSelectedAnswer();
     }
     return selectedOption;
+}
+
+void AddAnswerToList(string selectedOption, Question question)
+{
+    answers.Add( new Answer 
+    { QuestionId = question.Id,
+      SelectedOption = GetSelectedOption(selectedOption, question)
+    });
+}
+
+Option GetSelectedOption(string selectedOption, Question question)
+{
+    var playerSelectedOption = new Option();
+
+    foreach (var option in question.Options)
+    {
+        if(int.Parse(selectedOption) == option.Id)
+        {
+            playerSelectedOption = option;
+        }
+    }
+
+    return playerSelectedOption;
 }
 
 void SeedQuestionsAndOptions()
