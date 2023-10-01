@@ -33,6 +33,13 @@ void StartGame()
         Console.WriteLine($"Nice try {playerName} score: {score}");
         UpdateScore(playerName,score);
         ShowScores();
+        //play again or close game
+        answers = new List<Answer>();
+        Console.WriteLine("Do you want to play again?");
+        Console.WriteLine("enter yes or not");
+        var playAgain = Console.ReadLine();
+        if(playAgain?.ToLower().Trim() == "yes")
+            StartGame();
    }
    catch (Exception e)
    {
