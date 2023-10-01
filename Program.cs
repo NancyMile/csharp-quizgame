@@ -28,6 +28,8 @@ void StartGame()
            var selectedOption = GetSelectedAnswer();
            AddAnswerToList(selectedOption,question);
         }
+        int score = GetScore();
+        Console.WriteLine($"Nice try {playerName} score: {score}");
    }
    catch (Exception e)
    {
@@ -53,7 +55,7 @@ string GetSelectedAnswer()
 
 void AddAnswerToList(string selectedOption, Question question)
 {
-    answers.Add( new Answer 
+    answers.Add( new Answer
     { QuestionId = question.Id,
       SelectedOption = GetSelectedOption(selectedOption, question)
     });
@@ -72,6 +74,17 @@ Option GetSelectedOption(string selectedOption, Question question)
     }
 
     return playerSelectedOption;
+}
+
+int GetScore()
+{
+    int score = 0;
+    foreach (var item in answers)
+    {
+        if(item.SelectedOption.IsValid)
+            score++;
+    }
+    return score;
 }
 
 void SeedQuestionsAndOptions()
