@@ -32,6 +32,7 @@ void StartGame()
         int score = GetScore();
         Console.WriteLine($"Nice try {playerName} score: {score}");
         UpdateScore(playerName,score);
+        ShowScores();
    }
    catch (Exception e)
    {
@@ -94,16 +95,24 @@ void UpdateScore(string playerName, int score)
     bool updated = false;
     foreach (var item in scores)
     {
-        if(item.key == playerName)
+        if(item.Key == playerName)
         {
-            scores[item.key] = score;
+            scores[item.Key] = score;
             updated = true;
         }
+    }
 
-        if(!updated)
+    if(!updated)
         {
             scores.Add(playerName,score);
         }
+}
+
+void ShowScores(){
+    Console.WriteLine("Scores");
+    foreach (var item in scores)
+    {
+        Console.WriteLine($"{item.Key} : {item.Value}");
     }
 }
 
