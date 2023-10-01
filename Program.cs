@@ -14,15 +14,39 @@ void StartGame()
     playerName = Console.ReadLine();
     Console.WriteLine($"Welcome {playerName}");
 
-    foreach (var question in questions)
-    {
-        Console.WriteLine(question.QuestionText);
-        Console.WriteLine("Please type the number corresponding to your response");
+   try
+   {
+        foreach (var question in questions)
+        {
+            Console.WriteLine(question.QuestionText);
+            Console.WriteLine("Please type the number corresponding to your response");
             foreach (var option in question.Options)
             {
                 Console.WriteLine($"{option.Id} {option.Text}");
             }
+           var selectedOption = GetSelectedAnswer();
+        }
+   }
+   catch (Exception e)
+   {
+        Console.WriteLine($"Error: {e.Message}");
+   }
+}
+
+string GetSelectedAnswer()
+{
+    var selectedOption = Console.ReadLine();
+
+    if(selectedOption != null && (selectedOption == "1") || (selectedOption == "2") || (selectedOption == "3") || (selectedOption == "4"))
+    {
+        return selectedOption;
     }
+    else
+    {
+        Console.WriteLine("The option is not valid, please try again.");
+        selectedOption = GetSelectedAnswer();
+    }
+    return selectedOption;
 }
 
 void SeedQuestionsAndOptions()
