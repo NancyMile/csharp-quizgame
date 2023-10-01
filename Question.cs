@@ -1,6 +1,6 @@
 public class Question
 {
-    public int id { get; set; }
-    public string questionText { get; set; }
+    public int Id { get; set; }
+    public string QuestionText { get; set; }
     public List<Option> Options { get; set; }
 }
