@@ -4,6 +4,7 @@
 string playerName;
 var questions = new List<Question>();
 var answers = new List<Answer>();
+var scores = new Dictionary<string,int>();
 
 SeedQuestionsAndOptions();
 StartGame();
@@ -30,6 +31,7 @@ void StartGame()
         }
         int score = GetScore();
         Console.WriteLine($"Nice try {playerName} score: {score}");
+        UpdateScore(playerName,score);
    }
    catch (Exception e)
    {
@@ -85,6 +87,24 @@ int GetScore()
             score++;
     }
     return score;
+}
+
+void UpdateScore(string playerName, int score)
+{
+    bool updated = false;
+    foreach (var item in scores)
+    {
+        if(item.key == playerName)
+        {
+            scores[item.key] = score;
+            updated = true;
+        }
+
+        if(!updated)
+        {
+            scores.Add(playerName,score);
+        }
+    }
 }
 
 void SeedQuestionsAndOptions()
